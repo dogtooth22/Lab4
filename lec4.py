@@ -14,7 +14,7 @@ def lanzamientos(n):
     
 # 3.1.b
 
-muestras20 = lanzamientos(20)
+#muestras20 = lanzamientos(20)
 #media = np.mean(muestras20)
 #desviacionEstandar = np.std(muestras20)
 
@@ -33,4 +33,25 @@ def graficos():
     plt.show()
     plt.clf()
 
-graficos()
+#graficos()
+
+#3
+
+normal = sp.norm.rvs(size=1000, loc=15, scale=1.5)
+
+def log_verosimilitudN(muestra, desviacion):
+    producto = 1
+    for xi in muestra:
+        producto *= sp.norm.pdf(xi, loc=15, scale=desviacion)
+    return np.log10(producto)
+
+datosValores = list()
+valores = list()
+des = 0.01
+for i in range(3000):
+    datosValores.append(log_verosimilitudN(normal,des))
+    valores.append(des)
+    des+=0.01
+
+plt.plot(valores,datosValores)
+
